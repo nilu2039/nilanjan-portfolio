@@ -12,7 +12,7 @@ const About = () => {
       <p className="font-medium underline underline-offset-4 text-base">
         Skills & Technologies
       </p>
-      <ul className="leading-8">
+      <ul className="leading-8 list-disc list-inside">
         <li>
           <span className="font-bold">Languages: </span>TypeScript, JavaScript,
           Go, Python, SQL
