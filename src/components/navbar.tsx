@@ -36,7 +36,7 @@ const navLinks = [
 const NavBar = () => {
   return (
     <nav className="backdrop-blur-md fixed top-0 overflow-hidden grid grid-cols-[1fr_auto] w-11/12 md:w-9/12 md:8/12 lg:w-7/12 px-4 py-8">
-      <p className="text-lg font-medium">{NAME}</p>
+      <p className="text-xl md:text-2xl font-medium">{NAME}</p>
       <div className="hidden md:flex justify-between gap-14">
         {navLinks.map((link) => (
           <>
