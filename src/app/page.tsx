@@ -1,5 +1,7 @@
 import profileImage from "@/assets/images/nilanjan.png";
 import About from "@/components/about";
+import Conclusion from "@/components/conclusion";
+import Footer from "@/components/footer";
 import NavBar from "@/components/navbar";
 import Projects from "@/components/projects";
 import Work from "@/components/work";
@@ -22,6 +24,8 @@ export default function Home() {
           <About />
           <Work />
           <Projects />
+          <Conclusion />
+          <Footer />
         </div>
       </div>
     </div>
