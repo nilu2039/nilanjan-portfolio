@@ -8,6 +8,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
+import { NAME } from "@/constants";
 
 const navLinks = [
   {
@@ -34,8 +35,8 @@ const navLinks = [
 
 const NavBar = () => {
   return (
-    <nav className="backdrop-blur-md fixed top-0 overflow-hidden grid grid-cols-[1fr_auto] w-9/12 md:8/12 lg:w-7/12 p-4">
-      <p className="text-lg">Nilanjan Mandal</p>
+    <nav className="backdrop-blur-md fixed top-0 overflow-hidden grid grid-cols-[1fr_auto] w-11/12 md:w-9/12 md:8/12 lg:w-7/12 px-4 py-8">
+      <p className="text-lg font-medium">{NAME}</p>
       <div className="hidden md:flex justify-between gap-14">
         {navLinks.map((link) => (
           <>
