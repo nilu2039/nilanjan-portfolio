@@ -1,6 +1,7 @@
 import profileImage from "@/assets/images/nilanjan.png";
 import About from "@/components/about";
 import NavBar from "@/components/navbar";
+import Work from "@/components/work";
 import { NAME } from "@/constants";
 import Image from "next/image";
 
@@ -18,6 +19,7 @@ export default function Home() {
             <Image src={profileImage} alt={NAME} className="w-28 h-28" />
           </div>
           <About />
+          <Work />
         </div>
       </div>
     </div>
