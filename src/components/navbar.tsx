@@ -1,14 +1,12 @@
-import React from "react";
+import { NAME } from "@/constants";
+import { Github, Menu } from "lucide-react";
 import Link from "next/link";
-import { Menu } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
-import { NAME } from "@/constants";
 
 const navLinks = [
   {
@@ -29,7 +27,7 @@ const navLinks = [
   {
     id: 3,
     label: "Source",
-    icon: null,
+    icon: <Github size={15} />,
   },
 ];
 
@@ -37,17 +35,16 @@ const NavBar = () => {
   return (
     <nav className="backdrop-blur-md fixed top-0 overflow-hidden grid grid-cols-[1fr_auto] w-11/12 md:w-9/12 md:8/12 lg:w-7/12 px-4 py-8">
       <p className="text-xl md:text-2xl font-medium">{NAME}</p>
-      <div className="hidden md:flex justify-between gap-10">
+      <div className="hidden md:flex justify-between gap-8">
         {navLinks.map((link) => (
-          <>
-            <Link
-              key={link.id}
-              href={"#"}
-              className="hover:underline hover:text-primary"
-            >
-              {link.label}
-            </Link>
-          </>
+          <Link
+            key={link.id}
+            href={"#"}
+            className="hover:underline hover:text-primary flex flex-row gap-1 items-center"
+          >
+            {link.icon}
+            {link.label}
+          </Link>
         ))}
       </div>
 
@@ -58,7 +55,10 @@ const NavBar = () => {
         <DropdownMenuContent>
           {navLinks.map((link) => (
             <DropdownMenuItem key={link.id}>
-              <Link href={"#"}>{link.label}</Link>
+              <Link href={"#"} className="flex flex-row gap-1 items-center">
+                {link.icon}
+                {link.label}
+              </Link>
             </DropdownMenuItem>
           ))}
         </DropdownMenuContent>
