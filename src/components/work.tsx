@@ -1,6 +1,6 @@
 const Work = () => {
   return (
-    <div className="flex flex-col gap-4">
+    <div id="works" className="flex flex-col gap-4">
       <p className="font-medium underline decoration-4 decoration-primary underline-offset-4 text-xl">
         Professional Expertise
       </p>

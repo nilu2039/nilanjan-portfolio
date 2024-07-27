@@ -2,7 +2,7 @@ import { NAME } from "@/constants";
 
 const About = () => {
   return (
-    <div className="flex flex-col gap-4">
+    <div id="about" className="flex flex-col gap-4">
       <p className="font-medium underline decoration-4 decoration-primary underline-offset-4 text-xl">
         About
       </p>

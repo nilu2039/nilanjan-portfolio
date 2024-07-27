@@ -1,3 +1,5 @@
+"use client";
+
 import profileImage from "@/assets/images/nilanjan.png";
 import About from "@/components/about";
 import Conclusion from "@/components/conclusion";
@@ -7,8 +9,23 @@ import Projects from "@/components/projects";
 import Work from "@/components/work";
 import { NAME } from "@/constants";
 import Image from "next/image";
+import { useEffect } from "react";
+import { Events, scrollSpy } from "react-scroll";
 
 export default function Home() {
+  useEffect(() => {
+    Events.scrollEvent.register("begin", () => {});
+
+    Events.scrollEvent.register("end", () => {});
+
+    scrollSpy.update();
+
+    return () => {
+      Events.scrollEvent.remove("begin");
+      Events.scrollEvent.remove("end");
+    };
+  }, []);
+
   return (
     <div className="min-w-fit flex flex-col items-center min-h-dvh overflow-x-hidden">
       <div className="w-full md:w-9/12 h-full flex flex-col items-center">
