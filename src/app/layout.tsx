@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { M_PLUS_Rounded_1c } from "next/font/google";
 import { NAME } from "@/constants";
 import "./globals.css";
+import { ThemeProvider } from "@/components/theme-provider";
 
 const mPlusRounded = M_PLUS_Rounded_1c({
   weight: ["100", "300", "400", "500", "700"],
@@ -20,7 +21,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
-      <body className={mPlusRounded.className}>{children}</body>
+      <body className={mPlusRounded.className}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
+      </body>
     </html>
   );
 }
