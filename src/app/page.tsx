@@ -13,7 +13,7 @@ export default function Home() {
     <div className="min-w-fit flex flex-col items-center min-h-dvh overflow-x-hidden">
       <div className="w-full md:w-9/12 h-full flex flex-col items-center">
         <NavBar />
-        <div className="w-4/5 md:w-8/12 lg:w-7/12 mt-24 flex flex-col gap-10">
+        <div className="w-4/5 md:w-4/5 lg:w-8/12 mt-24 flex flex-col gap-10">
           <div className="text-sm md:text-base bg-secondary text-center py-2 rounded-lg font-medium px-5">
             Hello, I&apos;m a full-stack developer based in India
           </div>
