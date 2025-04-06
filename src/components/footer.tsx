@@ -6,7 +6,7 @@ import React from "react";
 const Footer = () => {
   return (
     <div className="flex flex-col text-muted-foreground items-center pb-10 gap-4">
-      <p className="text-center">© 2024 {NAME}. All Rights Reserved.</p>
+      <p className="text-center">© {new Date().getFullYear()} {NAME}. All Rights Reserved.</p>
       <div className="flex flex-row gap-8">
         <Link href={"https://github.com/nilu2039/"} target="_blank">
           <Github />
