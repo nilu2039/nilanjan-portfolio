@@ -1,6 +1,7 @@
+import { GitHubIcon, LinkedInIcon } from "./brand-icons";
 import profileImage from "@/assets/images/nilanjan.png";
 import { COMPANY_LINKS, GITHUB, LINKEDIN, RESUME } from "@/constants";
-import { ArrowDown, ArrowDownRight, ArrowUpRight, Asterisk, Github, Linkedin } from "lucide-react";
+import { ArrowDown, ArrowDownRight, ArrowUpRight, Asterisk } from "lucide-react";
 import Image from "next/image";
 
 export default function Intro() {
@@ -17,9 +18,9 @@ export default function Intro() {
             <a href={RESUME} download="Nilanjan-Mandal-Resume.pdf" className="button button-text">Download résumé <ArrowDown size={16} aria-hidden="true" /></a>
           </div>
           <div className="hero-socials">
-            <a href={GITHUB} target="_blank" rel="noopener noreferrer"><Github size={16} aria-hidden="true" /> GitHub <ArrowUpRight size={13} aria-hidden="true" /></a>
+            <a href={GITHUB} target="_blank" rel="noopener noreferrer"><GitHubIcon size={16} aria-hidden="true" /> GitHub <ArrowUpRight size={13} aria-hidden="true" /></a>
             <span className="social-divider" />
-            <a href={LINKEDIN} target="_blank" rel="noopener noreferrer"><Linkedin size={16} aria-hidden="true" /> LinkedIn <ArrowUpRight size={13} aria-hidden="true" /></a>
+            <a href={LINKEDIN} target="_blank" rel="noopener noreferrer"><LinkedInIcon size={16} aria-hidden="true" /> LinkedIn <ArrowUpRight size={13} aria-hidden="true" /></a>
           </div>
         </div>
         <div className="portrait-wrap">

@@ -9,10 +9,11 @@ pnpm install
 pnpm dev
 ```
 
-Open [localhost:3000](http://localhost:3000).
+Requires Node.js 20.19+, 22.13+, or 24+ and pnpm. Open [localhost:3000](http://localhost:3000).
 
 ```bash
-pnpm exec tsc --noEmit
+pnpm typecheck
+pnpm lint
 pnpm build
 pnpm start
 ```
@@ -26,3 +27,5 @@ pnpm start
 - Page metadata: `src/app/layout.tsx`.
 
 Professional project graphics are labeled illustrations. Flixr and Kaigi use original application screenshots. The page renders on the server; only navigation and theme controls need client-side state. Fonts use the system stack, with no external font requests.
+
+Tailwind CSS 4 uses CSS configuration in `globals.css` and `@tailwindcss/postcss`. ESLint uses `eslint.config.mjs`. Type checking runs the TypeScript 7 native compiler; the official TypeScript 6 API compatibility package remains available to Next.js and ESLint, which require the JavaScript compiler API.
