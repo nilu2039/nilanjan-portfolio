@@ -9,7 +9,7 @@ pnpm install
 pnpm dev
 ```
 
-Requires Node.js 20.19+, 22.13+, or 24+ and pnpm. Open [localhost:3000](http://localhost:3000).
+Requires Node.js 24.x and pnpm 10.34.8 (pinned in `package.json`). Open [localhost:3000](http://localhost:3000).
 
 ```bash
 pnpm typecheck
