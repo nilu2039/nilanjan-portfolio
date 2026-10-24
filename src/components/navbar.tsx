@@ -1,135 +1,49 @@
-import { NAME } from "@/constants";
-import {
-  DownloadIcon,
-  GitHubLogoIcon,
-  HamburgerMenuIcon,
-} from "@radix-ui/react-icons";
-import NextLink from "next/link";
-import { Link, animateScroll } from "react-scroll";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "./ui/dropdown-menu";
-import { ThemeToggle } from "./theme-toggle";
-import { Button } from "./ui/button";
+"use client";
 
-const navLinks = [
-  {
-    id: 0,
-    label: "Works",
-    icon: null,
-    to: "works",
-    type: "internal",
-  },
-  {
-    id: 1,
-    label: "Projects",
-    icon: null,
-    to: "projects",
-    type: "internal",
-  },
-  {
-    id: 2,
-    label: "Resume",
-    icon: <DownloadIcon />,
-    to: "/docs/resume.pdf",
-    type: "external",
-  },
-  {
-    id: 3,
-    label: "Source",
-    icon: <GitHubLogoIcon className="w-4 h-4" />,
-    to: "https://github.com/nilu2039/nilanjan-portfolio",
-    type: "external",
-  },
+import { ArrowUpRight, Menu, X } from "lucide-react";
+import { useRef, useState } from "react";
+import { ThemeToggle } from "./theme-toggle";
+
+const links = [
+  { href: "#projects", label: "Work" },
+  { href: "#works", label: "Experience" },
+  { href: "#about", label: "About" },
 ];
 
-const NavBar = () => {
-  return (
-    <nav className="backdrop-blur-md fixed top-0 overflow-hidden flex flex-row justify-between w-11/12 md:w-4/5 lg:w-8/12 px-4 pb-2 pt-4 items-center gap-4">
-      <p
-        className="text-xl lg:text-2xl font-medium cursor-pointer"
-        onClick={() => {
-          animateScroll.scrollToTop();
-        }}
-      >
-        {NAME}
-      </p>
-      <div className="flex flex-1 gap-4 justify-end">
-        <div className="hidden lg:flex justify-end gap-6 flex-1 ">
-          {navLinks.map((link) =>
-            link.type === "internal" ? (
-              <Link
-                key={link.id}
-                to={link.to}
-                smooth
-                offset={-100}
-                duration={500}
-                className="hover:underline hover:text-primary flex flex-row gap-1 items-center cursor-pointer"
-              >
-                {link.icon}
-                {link.label}
-              </Link>
-            ) : (
-              <NextLink
-                key={link.id}
-                href={link.to}
-                target="_blank"
-                rel="noopener noreferrer"
-                locale={false}
-                download
-                className="hover:underline hover:text-primary flex flex-row gap-1 items-center cursor-pointer"
-              >
-                {link.icon}
-                {link.label}
-              </NextLink>
-            )
-          )}
-        </div>
-        <ThemeToggle />
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="outline" size="icon" className="flex lg:hidden">
-              <HamburgerMenuIcon className="w-5 h-5" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent>
-            {navLinks.map((link) => (
-              <DropdownMenuItem key={link.id}>
-                {link.type === "internal" ? (
-                  <Link
-                    to={link.to}
-                    smooth
-                    offset={-100}
-                    duration={500}
-                    className="flex flex-row gap-1 items-center"
-                  >
-                    {link.icon}
-                    {link.label}
-                  </Link>
-                ) : (
-                  <NextLink
-                    key={link.id}
-                    href={link.to}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    locale={false}
-                    download
-                    className="flex flex-row gap-1 items-center "
-                  >
-                    {link.icon}
-                    {link.label}
-                  </NextLink>
-                )}
-              </DropdownMenuItem>
-            ))}
-          </DropdownMenuContent>
-        </DropdownMenu>
-      </div>
-    </nav>
-  );
-};
+export default function NavBar() {
+  const [open, setOpen] = useState(false);
+  const menuButton = useRef<HTMLButtonElement>(null);
 
-export default NavBar;
+  return (
+    <header className="site-header" onKeyDown={(event) => {
+      if (event.key === "Escape" && open) {
+        setOpen(false);
+        menuButton.current?.focus();
+      }
+    }}>
+      <div className="shell nav-inner">
+        <a href="#" className="wordmark" aria-label="Nilanjan Mandal, home" onClick={() => setOpen(false)}>
+          <span className="monogram">nm<span>.</span></span>
+          <span className="wordmark-name">Nilanjan Mandal</span>
+        </a>
+        <nav className="desktop-nav" aria-label="Main navigation">
+          {links.map((link) => <a key={link.href} href={link.href}>{link.label}</a>)}
+        </nav>
+        <div className="nav-actions">
+          <ThemeToggle />
+          <a className="nav-contact" href="#contact">Let’s talk <ArrowUpRight size={15} aria-hidden="true" /></a>
+          <button ref={menuButton} className="icon-button menu-toggle" aria-label={open ? "Close navigation" : "Open navigation"} aria-expanded={open} aria-controls="mobile-navigation" onClick={() => setOpen(!open)}>
+            {open ? <X size={21} /> : <Menu size={21} />}
+          </button>
+        </div>
+      </div>
+      {open && (
+        <nav id="mobile-navigation" className="mobile-nav shell" aria-label="Mobile navigation">
+          {[...links, { href: "#contact", label: "Let’s talk" }].map((link) => (
+            <a key={link.href} href={link.href} onClick={() => setOpen(false)}>{link.label}<ArrowUpRight size={18} aria-hidden="true" /></a>
+          ))}
+        </nav>
+      )}
+    </header>
+  );
+}

@@ -1,19 +1,28 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Nilanjan Mandal — Portfolio
 
-## Getting Started
+A responsive portfolio built with Next.js App Router, TypeScript, and Tailwind CSS. Includes light, dark, and system themes, professional project summaries, personal projects, experience, and a downloadable résumé.
 
-First, run the development server:
+## Development
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+pnpm install
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+pnpm exec tsc --noEmit
+pnpm build
+pnpm start
+```
+
+## Updating the content
+
+- Contact details and profile links: `src/constants.ts`.
+- Introduction, projects, experience, and skills: the corresponding files in `src/components/`.
+- Résumé: replace `public/docs/resume.pdf` to preserve existing download links.
+- Design and responsive layouts: `src/app/globals.css`.
+- Page metadata: `src/app/layout.tsx`.
+
+Professional project graphics are labeled illustrations. Flixr and Kaigi use original application screenshots. The page renders on the server; only navigation and theme controls need client-side state. Fonts use the system stack, with no external font requests.

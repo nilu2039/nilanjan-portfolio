@@ -1,28 +1,10 @@
-import React from "react";
+import { EMAIL, GITHUB, LINKEDIN } from "@/constants";
+import { ArrowUpRight, Asterisk, Github, Linkedin, Mail } from "lucide-react";
 
-const Conclusion = () => {
+export default function Conclusion() {
   return (
-    <div className="flex flex-col gap-4  text-lg">
-      <p className="font-medium underline decoration-4 decoration-primary underline-offset-4 text-xl">
-        My Philosophy
-      </p>
-      <p className="">
-        I am deeply committed to continuous learning and staying abreast of the
-        latest technologies and industry trends. My approach to software
-        engineering is rooted in a combination of technical expertise and
-        creativity, aiming to deliver solutions that not only meet but exceed
-        user expectations.
-      </p>
-      <p className="">
-        My passion for technology extends beyond coding. I am an advocate for
-        clean, maintainable code and follow best practices to ensure that my
-        work is not only functional but also scalable and easy to understand for
-        other developers. I enjoy collaborating with cross-functional teams to
-        bring ideas to life and am always looking for opportunities to learn
-        from others and share my knowledge.
-      </p>
-    </div>
+    <section id="contact" className="contact-section" aria-labelledby="contact-heading">
+      <div className="shell contact-inner"><div><p className="eyebrow">04 / WHAT’S NEXT?</p><h2 id="contact-heading">Have something<br /><span className="serif">good in mind?</span></h2><p>A product to build, a tricky problem, or just a hello.<br />I’d love to hear from you.</p><a href={`mailto:${EMAIL}`} className="contact-email">{EMAIL}<ArrowUpRight aria-hidden="true" /></a><div className="contact-socials"><a href={`mailto:${EMAIL}`}><Mail size={16} aria-hidden="true" /> Email me <ArrowUpRight size={13} aria-hidden="true" /></a><a href={GITHUB} target="_blank" rel="noopener noreferrer"><Github size={16} aria-hidden="true" /> GitHub <ArrowUpRight size={13} aria-hidden="true" /></a><a href={LINKEDIN} target="_blank" rel="noopener noreferrer"><Linkedin size={16} aria-hidden="true" /> LinkedIn <ArrowUpRight size={13} aria-hidden="true" /></a></div></div><Asterisk className="contact-asterisk" strokeWidth={0.9} aria-hidden="true" /></div>
+    </section>
   );
-};
-
-export default Conclusion;
+}

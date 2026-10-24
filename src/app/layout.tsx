@@ -1,33 +1,25 @@
 import type { Metadata } from "next";
-import { M_PLUS_Rounded_1c } from "next/font/google";
-import { NAME } from "@/constants";
-import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
-
-const mPlusRounded = M_PLUS_Rounded_1c({
-  weight: ["100", "300", "400", "500", "700"],
-  subsets: ["latin"],
-});
+import "./globals.css";
 
 export const metadata: Metadata = {
-  title: NAME,
-  description: `Portfolio website of ${NAME}`,
+  title: "Nilanjan Mandal — Full-stack Engineer",
+  description: "I build thoughtful web and mobile experiences. Explore my work in React, Next.js, React Native, and the systems behind them.",
+  openGraph: {
+    title: "Nilanjan Mandal — Full-stack Engineer",
+    description: "Thoughtful code. Useful things. Web, mobile, and the systems in between.",
+    type: "website",
+    locale: "en_IN",
+  },
+  twitter: { card: "summary" },
+  icons: { icon: "/icon.svg" },
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className="dark">
-      <body className={mPlusRounded.className}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem
-          disableTransitionOnChange
-        >
+    <html lang="en" suppressHydrationWarning>
+      <body>
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
           {children}
         </ThemeProvider>
       </body>
