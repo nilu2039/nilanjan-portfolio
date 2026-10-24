@@ -241,7 +241,7 @@ h1 .serif { letter-spacing: -3.5px; }
 .personal-copy { padding: 25px 28px; }
 .personal-copy h3 { display: flex; justify-content: space-between; align-items: center; font-size: 26px; letter-spacing: -.8px; margin-bottom: 13px; }
 .project-title-icon { color: var(--subtle); }
-.repo-links { display: flex; gap: 22px; border-top: 1px solid var(--line); padding-top: 20px; margin-top: 24px; }
+.repo-links { display: flex; flex-wrap: wrap; gap: 16px 22px; border-top: 1px solid var(--line); padding-top: 20px; margin-top: 24px; }
 .repo-links a { display: inline-flex; align-items: center; gap: 7px; font-size: 10px; }
 .experience-section { background: var(--soft); border-block: 1px solid var(--line); }
 .experience-layout { display: grid; grid-template-columns: 1fr 1.25fr; gap: 110px; }

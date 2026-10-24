@@ -1,7 +1,8 @@
 import flixrImage from "@/assets/images/flixr.png";
+import hushmarkImage from "@/assets/images/hushmark.jpg";
 import kaigiImage from "@/assets/images/kaigi.png";
 import { GITHUB } from "@/constants";
-import { ArrowRight, ArrowUpRight, BoxSelect, Check, ChevronDown, Layers3, ScanLine, Smartphone, Upload, Workflow, Video } from "lucide-react";
+import { ArrowRight, ArrowUpRight, BoxSelect, Check, ChevronDown, Layers3, ScanLine, ShieldCheck, Smartphone, Upload, Workflow, Video } from "lucide-react";
 import Image from "next/image";
 
 function AnnotationVisual() {
@@ -40,8 +41,9 @@ function MobileVisual() {
 }
 
 const personalProjects = [
-  { title: "Flixr", category: "YOUTUBE WORKFLOW AUTOMATION", description: "From an editor’s upload to an admin’s approval to a published video. A simpler workflow for content teams.", image: flixrImage, tags: ["Next.js", "Express", "PostgreSQL", "Redis"], repos: [{ label: "Frontend", href: `${GITHUB}/flixr-client` }, { label: "Backend", href: `${GITHUB}/flixr-server` }] },
-  { title: "Kaigi", category: "REAL-TIME COLLABORATION", description: "A space to talk, sketch, and work together, with peer-to-peer video, live messaging, and a shared whiteboard.", image: kaigiImage, tags: ["Next.js", "Fastify", "WebRTC", "Socket.IO"], repos: [{ label: "Frontend", href: `${GITHUB}/kaigi-client` }, { label: "Backend", href: `${GITHUB}/kaigi-server` }] },
+  { title: "HushMark", category: "PERSONAL INFORMATION REDACTION", description: "Find sensitive information in text, documents, and audio. Review each match, redact selected details, and export protected text or beeped audio.", image: hushmarkImage, icon: ShieldCheck, tags: ["Next.js", "FastAPI", "Presidio", "OpenAI"], links: [{ label: "Live demo", href: "https://hush-mark.nilanjan.xyz/" }, { label: "Frontend source", href: `${GITHUB}/hush-mark-web` }, { label: "Backend source", href: `${GITHUB}/hush-mark` }] },
+  { title: "Flixr", category: "YOUTUBE WORKFLOW AUTOMATION", description: "From an editor’s upload to an admin’s approval to a published video. A simpler workflow for content teams.", image: flixrImage, icon: Workflow, tags: ["Next.js", "Express", "PostgreSQL", "Redis"], links: [{ label: "Frontend source", href: `${GITHUB}/flixr-client` }, { label: "Backend source", href: `${GITHUB}/flixr-server` }] },
+  { title: "Kaigi", category: "REAL-TIME COLLABORATION", description: "A space to talk, sketch, and work together, with peer-to-peer video, live messaging, and a shared whiteboard.", image: kaigiImage, icon: Video, tags: ["Next.js", "Fastify", "WebRTC", "Socket.IO"], links: [{ label: "Frontend source", href: `${GITHUB}/kaigi-client` }, { label: "Backend source", href: `${GITHUB}/kaigi-server` }] },
 ];
 
 export default function Projects() {
@@ -66,7 +68,7 @@ export default function Projects() {
       <div className="personal-grid">{personalProjects.map((project) => (
         <article className="personal-project" key={project.title}>
           <div className={`personal-image ${project.title.toLowerCase()}-image`}><Image src={project.image} alt={`${project.title} application interface`} sizes="(max-width: 700px) 90vw, 45vw" /></div>
-          <div className="personal-copy"><p className="project-category">{project.category}</p><h3>{project.title}<span className="project-title-icon">{project.title === "Flixr" ? <Workflow size={22} aria-hidden="true" /> : <Video size={22} aria-hidden="true" />}</span></h3><p>{project.description}</p><div className="tags">{project.tags.map((tag) => <span key={tag}>{tag}</span>)}</div><div className="repo-links">{project.repos.map((repo) => <a key={repo.href} href={repo.href} target="_blank" rel="noopener noreferrer" aria-label={`${project.title} ${repo.label} source on GitHub`}>{repo.label} source <ArrowUpRight size={14} aria-hidden="true" /></a>)}</div></div>
+          <div className="personal-copy"><p className="project-category">{project.category}</p><h3>{project.title}<span className="project-title-icon"><project.icon size={22} aria-hidden="true" /></span></h3><p>{project.description}</p><div className="tags">{project.tags.map((tag) => <span key={tag}>{tag}</span>)}</div><div className="repo-links">{project.links.map((link) => <a key={link.href} href={link.href} target="_blank" rel="noopener noreferrer" aria-label={`${project.title} ${link.label}`}>{link.label} <ArrowUpRight size={14} aria-hidden="true" /></a>)}</div></div>
         </article>
       ))}</div>
     </section>
