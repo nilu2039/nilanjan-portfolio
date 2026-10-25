@@ -237,6 +237,7 @@ h1 .serif { letter-spacing: -3.5px; }
 .personal-image { padding: 24px 24px 0; height: 230px; overflow: hidden; background: #e4e7e0; }
 .personal-image img { width: 100%; height: auto; transition: transform .4s; }
 .personal-project:hover .personal-image img { transform: translateY(-4px); }
+.hushmark-image { background: #e9e7f4; }
 .kaigi-image { background: #e6e3ea; }
 .personal-copy { padding: 25px 28px; }
 .personal-copy h3 { display: flex; justify-content: space-between; align-items: center; font-size: 26px; letter-spacing: -.8px; margin-bottom: 13px; }
