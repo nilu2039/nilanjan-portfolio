@@ -1,49 +1,85 @@
 "use client";
 
-import { ArrowUpRight, Menu, X } from "lucide-react";
-import { useRef, useState } from "react";
+import { ArrowUpRightIcon } from "@phosphor-icons/react/ssr";
+import { useEffect, useRef, useState } from "react";
 import { ThemeToggle } from "./theme-toggle";
 
 const links = [
   { href: "#projects", label: "Work" },
   { href: "#works", label: "Experience" },
   { href: "#about", label: "About" },
+  { href: "#contact", label: "Let’s talk" },
 ];
 
 export default function NavBar() {
   const [open, setOpen] = useState(false);
+  const [active, setActive] = useState("intro");
+  const dialog = useRef<HTMLDialogElement>(null);
   const menuButton = useRef<HTMLButtonElement>(null);
 
-  return (
-    <header className="site-header" onKeyDown={(event) => {
-      if (event.key === "Escape" && open) {
-        setOpen(false);
-        menuButton.current?.focus();
+  function closeMenu() {
+    dialog.current?.close();
+    setOpen(false);
+    menuButton.current?.focus();
+  }
+
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) setActive(entry.target.id);
       }
-    }}>
-      <div className="shell nav-inner">
-        <a href="#" className="wordmark" aria-label="Nilanjan Mandal, home" onClick={() => setOpen(false)}>
-          <span className="monogram">nm<span>.</span></span>
-          <span className="wordmark-name">Nilanjan Mandal</span>
-        </a>
-        <nav className="desktop-nav" aria-label="Main navigation">
-          {links.map((link) => <a key={link.href} href={link.href}>{link.label}</a>)}
-        </nav>
-        <div className="nav-actions">
-          <ThemeToggle />
-          <a className="nav-contact" href="#contact">Let’s talk <ArrowUpRight size={15} aria-hidden="true" /></a>
-          <button ref={menuButton} className="icon-button menu-toggle" aria-label={open ? "Close navigation" : "Open navigation"} aria-expanded={open} aria-controls="mobile-navigation" onClick={() => setOpen(!open)}>
-            {open ? <X size={21} /> : <Menu size={21} />}
-          </button>
+    }, { rootMargin: "-15% 0px -55% 0px" });
+    document.querySelectorAll("#intro, #projects, #works, #about, #contact").forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!open) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const desktop = window.matchMedia("(min-width: 701px)");
+    function closeOnDesktop(event: MediaQueryListEvent) {
+      if (event.matches) {
+        dialog.current?.close();
+        setOpen(false);
+      }
+    }
+    desktop.addEventListener("change", closeOnDesktop);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      desktop.removeEventListener("change", closeOnDesktop);
+    };
+  }, [open]);
+
+  return (
+    <>
+      <header className="site-header">
+        <div className="nav-inner">
+          <a href="#intro" className="wordmark" aria-label="Nilanjan Mandal, home" aria-current={active === "intro" ? "page" : undefined}>
+            <span className="monogram heading-4">nm<span>.</span></span>
+            <span className="wordmark-name title-4">Nilanjan Mandal</span>
+          </a>
+          <nav className="desktop-nav" aria-label="Main navigation">
+            {links.map((link) => <a className="title-4" key={link.href} href={link.href} aria-current={active === link.href.slice(1) ? "location" : undefined}>{link.label}</a>)}
+          </nav>
+          <div className="nav-actions">
+            <ThemeToggle />
+            <button ref={menuButton} type="button" className={`icon-button menu-toggle ${open ? "is-open" : ""}`} aria-label="Open navigation" aria-expanded={open} aria-controls="mobile-navigation" onClick={() => { dialog.current?.showModal(); setOpen(true); }}>
+              <span className="menu-lines" aria-hidden="true"><span /><span /></span>
+            </button>
+          </div>
         </div>
-      </div>
-      {open && (
-        <nav id="mobile-navigation" className="mobile-nav shell" aria-label="Mobile navigation">
-          {[...links, { href: "#contact", label: "Let’s talk" }].map((link) => (
-            <a key={link.href} href={link.href} onClick={() => setOpen(false)}>{link.label}<ArrowUpRight size={18} aria-hidden="true" /></a>
-          ))}
+      </header>
+      <dialog ref={dialog} id="mobile-navigation" className="mobile-menu" aria-labelledby="mobile-menu-title" onCancel={() => setOpen(false)} onClose={() => setOpen(false)}>
+        <div className="mobile-menu-top">
+          <p id="mobile-menu-title" className="title-3">Nilanjan Mandal</p>
+          <button type="button" className="icon-button is-open" aria-label="Close navigation" onClick={closeMenu}><span className="menu-lines" aria-hidden="true"><span /><span /></span></button>
+        </div>
+        <nav className="mobile-nav" aria-label="Mobile navigation">
+          {links.map((link) => <a className="heading-3" key={link.href} href={link.href} aria-current={active === link.href.slice(1) ? "location" : undefined} onClick={closeMenu}>{link.label}<ArrowUpRightIcon size={32} aria-hidden="true" /></a>)}
         </nav>
-      )}
-    </header>
+        <p className="mobile-menu-note body-3">Thoughtful code. Useful things.<br />Web, mobile, and the systems in between.</p>
+      </dialog>
+    </>
   );
 }

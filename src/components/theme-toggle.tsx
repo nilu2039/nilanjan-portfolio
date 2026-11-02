@@ -1,6 +1,6 @@
 "use client";
 
-import { Moon, Sun } from "lucide-react";
+import { MoonIcon as Moon, SunIcon as Sun } from "@phosphor-icons/react/ssr";
 import { useTheme } from "next-themes";
 
 import {
@@ -11,25 +11,25 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 export function ThemeToggle() {
-  const { setTheme } = useTheme();
+  const { theme, setTheme } = useTheme();
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <button type="button" className="icon-button">
-          <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-          <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+          <Sun className="theme-icon theme-sun" aria-hidden="true" />
+          <Moon className="theme-icon theme-moon" aria-hidden="true" />
           <span className="sr-only">Toggle theme</span>
         </button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => setTheme("light")}>
+      <DropdownMenuContent align="end" className="theme-menu">
+        <DropdownMenuItem className="theme-menu-item title-4" aria-current={theme === "light" ? "true" : undefined} onClick={() => setTheme("light")}>
           Light
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("dark")}>
+        <DropdownMenuItem className="theme-menu-item title-4" aria-current={theme === "dark" ? "true" : undefined} onClick={() => setTheme("dark")}>
           Dark
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("system")}>
+        <DropdownMenuItem className="theme-menu-item title-4" aria-current={theme === "system" ? "true" : undefined} onClick={() => setTheme("system")}>
           System
         </DropdownMenuItem>
       </DropdownMenuContent>
